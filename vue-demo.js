@@ -4,8 +4,6 @@ const webpack = require('webpack')
 
 module.exports = {
   transpileDependencies: true,
-
-
   chainWebpack: webpackConfig => {
     // 我们需要禁用 cache loader，否则客户端构建版本会从服务端构建版本使用缓存过的组件
     webpackConfig.module.rule('vue').uses.delete('cache-loader')
@@ -63,3 +61,44 @@ module.exports = {
 }
 
 
+// const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+// const nodeExternals = require('webpack-node-externals')
+// const webpack = require('webpack')
+// const { defineConfig } = require("@vue/cli-service");
+// const merge = require("lodash.merge");
+
+// // 判断 build:server OR build:client
+// const TARGET_NODE = process.env.WEBPACK_TARGET === "node";
+// const target = TARGET_NODE ? "server" : "client";
+
+// module.exports = defineConfig({
+//   transpileDependencies: true,
+//   outputDir: `./dist/${target}`,
+//   configureWebpack: () => ({
+//     entry: `./entry.${target}.js`,
+//     output: {
+//       libraryTarget: TARGET_NODE ? "commonjs2" : undefined,
+//     },
+//     devtool: "source-map",
+//     target: TARGET_NODE ? "node" : "web",
+//     module: {},
+//     optimization: TARGET_NODE
+//       ? {
+//           splitChunks: {
+//             name: "manifest",
+//             minChunks: Infinity,
+//           },
+//         }
+//       : {},
+//   }),
+//   chainWebpack: (config) => {
+//     config.module
+//       .rule("vue")
+//       .use("vue-loader")
+//       .tap((options) => {
+//         merge(options, {
+//           optimizeSSR: false,
+//         });
+//       });
+//   },
+// });
