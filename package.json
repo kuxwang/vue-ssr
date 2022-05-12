@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "@vue/server-renderer": "3.2.31",
+    "@vueuse/core": "^8.4.2",
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "express": "^4.18.1",
+    "vant": "^3.4.9",
     "vue": "3.2.31",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
@@ -29,6 +32,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "nodemon": "^2.0.16",
+    "postcss-px-to-viewport": "^1.1.1",
     "webpack-manifest-plugin": "^5.0.0",
     "webpack-node-externals": "^3.0.0"
   }
