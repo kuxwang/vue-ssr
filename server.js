@@ -1,7 +1,6 @@
 const express = require("express");
 const server = express();
 const path = require("path");
-const { renderToString } = require('@vue/server-renderer')
 const manifest = require("./dist/server/ssr-manifest.json");
 const appPath = path.join(__dirname, "./dist", "server", manifest["app.js"]);
 const createApp = require(appPath).default;
@@ -9,7 +8,7 @@ const fs = require("fs");
 // 搭建静态资源目录
 server.use(
   "/",
-  express.static(path.join(__dirname, "./dist"), { index: false })
+  express.static(path.join(__dirname, "./dist","client"), { index: false })
 );
 // 获取模板
 const indexTemplate = fs.readFileSync(
@@ -17,24 +16,13 @@ const indexTemplate = fs.readFileSync(
   "utf-8"
 );
 
-const replaceHtmlTag =(html)=> {
-  return html
-    .replace(/<script(.*?)>/gi, "&lt;script$1&gt;")
-    .replace(/<\/script>/g, "&lt;/script&gt;");
-}
-
 server.get("*", async (req, res) => {
   try {
-    const { app,router,store } = createApp(req)
-    const appContent = await renderToString(app)
-    await router.push(req.url)
-    await router.isReady()
+    const appContent = await createApp(req);
+
     let html = indexTemplate
     .toString()
     .replace('<div id="app">', `<div id="app">${appContent}`);
-    html += `<script>window.__INITIAL_STATE__ = ${replaceHtmlTag(
-      JSON.stringify(store.state)
-    )}</script>`;
 
   res.setHeader("Content-Type", "text/html");
   res.send(html);
