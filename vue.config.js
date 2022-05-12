@@ -1,11 +1,32 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
+const path = require('path');
 
 module.exports = {
   transpileDependencies: true,
-
-
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+        'pages':path.resolve(__dirname, 'src/pages'),
+        'component': path.resolve(__dirname, 'src/components'),
+        'img': path.resolve(__dirname, 'src/assets/img'),
+      }
+    },
+    devServer: {
+      port: 8080,
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8080',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/api': '/mock'
+          }
+        }
+      }
+    },
+  },
   chainWebpack: webpackConfig => {
     // 我们需要禁用 cache loader，否则客户端构建版本会从服务端构建版本使用缓存过的组件
     webpackConfig.module.rule('vue').uses.delete('cache-loader')

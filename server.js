@@ -19,7 +19,6 @@ const indexTemplate = fs.readFileSync(
 server.get("*", async (req, res) => {
   try {
     const appContent = await createApp(req);
-
     let html = indexTemplate
     .toString()
     .replace('<div id="app">', `<div id="app">${appContent}`);

@@ -1,5 +1,6 @@
 module.exports = {
   plugins: [
+    require('tailwindcss'),
     require('postcss-px-to-viewport')({ 
       viewportWidth: 750,
       viewportHeight: 1334, 
