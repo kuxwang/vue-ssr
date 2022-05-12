@@ -6,7 +6,6 @@ const manifest = require("./dist/server/ssr-manifest.json");
 const appPath = path.join(__dirname, "./dist", "server", manifest["app.js"]);
 const createApp = require(appPath).default;
 const fs = require("fs");
-
 // 搭建静态资源目录
 server.use(
   "/",
@@ -14,7 +13,7 @@ server.use(
 );
 // 获取模板
 const indexTemplate = fs.readFileSync(
-  path.join(__dirname, "./dist/client/index.html"),
+  path.join(__dirname, "./dist", "client","/index.html"),
   "utf-8"
 );
 
@@ -23,27 +22,25 @@ const replaceHtmlTag =(html)=> {
     .replace(/<script(.*?)>/gi, "&lt;script$1&gt;")
     .replace(/<\/script>/g, "&lt;/script&gt;");
 }
+// console.log(indexTemplate)
 
 server.get("*", async (req, res) => {
   try {
     // const appContent = await createApp(req);
     const { app,router,store } = createApp(req)
-    console.log(app)
-
-    await router.push(req.url)
-    await router.isReady()
-
+    console.log(router)
     const appContent = await renderToString(app)
 
-   
     let html = indexTemplate
-      .toString()
-      .replace('<div id="app">', `<div id="app">${appContent}`);
-      html += `<script>window.__INITIAL_STATE__ = ${replaceHtmlTag(
-        JSON.stringify(store.state)
-      )}</script>`;
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
+    .toString()
+    .replace('<div id="app">', `<div id="app">${appContent}`);
+    html += `<script>window.__INITIAL_STATE__ = ${replaceHtmlTag(
+      JSON.stringify(store.state)
+    )}</script>`;
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(html);
+    
   } catch (error) {
     console.log(error);
     if (error.code == 404) {
