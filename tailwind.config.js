@@ -2,13 +2,15 @@ module.exports = {
   content: [],
   theme: {
     extend: {},
+    colors:{
+      primary: "#128bed"
+    },
     spacing: {
-      '1': '8px',
-      '2': '12px',
-      '3': '16px',
-      '4': '24px',
-      '5': '32px',
-      '6': '48px',
+      px: '1px',
+      5: '5px',
+      10: '10px',
+      15: '10px',
+      20: '10px',
     }
   },
   plugins: [],
