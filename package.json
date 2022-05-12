@@ -33,6 +33,7 @@
     "eslint-plugin-vue": "^8.0.3",
     "nodemon": "^2.0.16",
     "postcss-px-to-viewport": "^1.1.1",
+    "style-resources-loader": "^1.5.0",
     "webpack-manifest-plugin": "^5.0.0",
     "webpack-node-externals": "^3.0.0"
   }

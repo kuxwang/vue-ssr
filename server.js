@@ -26,12 +26,9 @@ const replaceHtmlTag =(html)=> {
 server.get("*", async (req, res) => {
   try {
     const { app,router,store } = createApp(req)
-    console.log(router)
     const appContent = await renderToString(app)
-
     await router.push(req.url)
     await router.isReady()
-
     let html = indexTemplate
     .toString()
     .replace('<div id="app">', `<div id="app">${appContent}`);
