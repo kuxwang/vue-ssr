@@ -22,14 +22,15 @@ const replaceHtmlTag =(html)=> {
     .replace(/<script(.*?)>/gi, "&lt;script$1&gt;")
     .replace(/<\/script>/g, "&lt;/script&gt;");
 }
-// console.log(indexTemplate)
 
 server.get("*", async (req, res) => {
   try {
-    // const appContent = await createApp(req);
     const { app,router,store } = createApp(req)
     console.log(router)
     const appContent = await renderToString(app)
+
+    await router.push(req.url)
+    await router.isReady()
 
     let html = indexTemplate
     .toString()
