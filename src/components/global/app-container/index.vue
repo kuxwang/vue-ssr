@@ -2,14 +2,12 @@
   <div class="container">app-container</div>
 </template>
 
-<script lang="ts">
+
+<script>
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   name:'app-container',
-  setup() {
-    
-  },
 })
 </script>
 

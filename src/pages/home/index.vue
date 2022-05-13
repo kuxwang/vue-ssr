@@ -1,27 +1,21 @@
 <template>
   <div class="home">
-    <Button type="primary">主要按钮</Button>
-    <div class="grid grid-cols-3">
-      <div>1</div>
-      <div>2</div>
-      <div>2</div>
-      <div>2</div>
-      <div>2</div>
-      <div>2</div>
-      <div>2</div>
-    </div>
+    <!-- <Button type="primary">主要按钮</Button> -->
+    <app-container></app-container>
   </div>
 </template>
 
 <script>
 // import {button}
 // @ is an alias to /src
-import { Button } from 'vant';
+// import { Button } from 'vant';
+import AppContainer from 'components/global/app-container'
 
 export default {
   name: 'HomeView',
   components: {
-    Button
+    // Button,
+    AppContainer
   }
 }
 </script>

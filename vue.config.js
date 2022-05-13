@@ -10,7 +10,7 @@ module.exports = {
       alias: {
         '@': path.resolve(__dirname, 'src'),
         'pages':path.resolve(__dirname, 'src/pages'),
-        'component': path.resolve(__dirname, 'src/components'),
+        'components': path.resolve(__dirname, 'src/components'),
         'img': path.resolve(__dirname, 'src/assets/img'),
       }
     },
@@ -54,7 +54,7 @@ module.exports = {
     webpackConfig.target('node')
     // 这会告诉服务端的包使用 Node 风格的导出
     webpackConfig.output.libraryTarget('commonjs2')
-
+    console.log('runrunrurn')
     webpackConfig
       .plugin('manifest')
       .use(new WebpackManifestPlugin({ fileName: 'ssr-manifest.json' }))
