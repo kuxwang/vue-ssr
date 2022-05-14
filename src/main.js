@@ -1,9 +1,11 @@
 import { createSSRApp } from 'vue'
 import App from './App.vue'
-import "tailwindcss/tailwind.css"
+import { ConfigProvider } from 'vant';
+import "@/assets/css/global.less"
 
 
 export const createApp = () =>{
   const app = createSSRApp(App)
+  app.use(ConfigProvider);
   return app
 }

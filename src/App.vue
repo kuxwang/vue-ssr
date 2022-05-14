@@ -1,6 +1,21 @@
 <template>
-  <router-view/>
+  <van-config-provider :theme-vars="themeVars">
+    <router-view />
+  </van-config-provider>
 </template>
+
+
+<script>
+import {themeVars} from '@/utils/vant-config'
+export default {
+  setup(){
+    return {
+      themeVars
+    };
+  }
+}
+</script>
+
 
 <style>
 #app {
