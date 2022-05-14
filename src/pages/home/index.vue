@@ -3,7 +3,7 @@
     <Button type="primary">主要按钮</Button>
     <app-container></app-container>
     <div class="grid grid-cols-3">
-      <div>1</div>
+      <div class="p-15 ">1</div>
       <div>1</div>
       <div>1</div>
       <div>1</div>
